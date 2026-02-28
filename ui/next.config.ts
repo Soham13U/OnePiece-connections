@@ -15,7 +15,9 @@ const nextConfig: NextConfig = {
   basePath,
   assetPrefix: basePath || undefined,
   images: {
-    unoptimized: true, // Required for static export
+    // In production (GitHub Pages export) we must disable Next's image optimizer.
+    // In dev, keep optimization enabled so images are served via localhost (helps when remote hosts are blocked).
+    unoptimized: process.env.NODE_ENV === 'production',
     remotePatterns: [
       {
         protocol: 'https',
