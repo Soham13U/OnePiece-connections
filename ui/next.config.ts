@@ -21,6 +21,9 @@ const nextConfig: NextConfig = {
     // In production (GitHub Pages export) we must disable Next's image optimizer.
     // In dev, keep optimization enabled so images are served via localhost (helps when remote hosts are blocked).
     unoptimized: isProduction,
+    // Custom loader for production to handle absolute URLs correctly
+    loader: isProduction ? 'custom' : 'default',
+    loaderFile: isProduction ? './imageLoader.js' : undefined,
     remotePatterns: [
       {
         protocol: 'https',
