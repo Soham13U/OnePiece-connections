@@ -372,7 +372,7 @@ export default function Home() {
                                     src={c.imageUrl}
                                     alt={c.name}
                                     className="object-contain w-full h-full"
-                                    crossOrigin="anonymous"
+                                    referrerPolicy="no-referrer"
                                   />
                                 </span>
                               )}
@@ -443,18 +443,18 @@ export default function Home() {
                           g.characterIds.includes(cell.id)
                       )
                   )
-                  .map((cell) => {
-                    const state = getCellState(cell.id);
-                    const base =
-                      'relative aspect-square rounded-lg sm:rounded-xl border-2 shadow-lg overflow-hidden cursor-pointer transition-all duration-300 bg-gradient-to-br from-sky-900/90 to-sky-950/90 backdrop-blur-sm';
-                    const colors =
-                      state === 'solved'
-                        ? 'bg-gradient-to-br from-emerald-700/90 to-emerald-800/90 border-emerald-400/60 scale-95 opacity-60'
-                        : state === 'selected'
-                        ? 'ring-4 ring-amber-400/80 border-amber-400 scale-110 shadow-2xl shadow-amber-500/50 z-20 bg-gradient-to-br from-sky-800/90 to-sky-900/90'
-                        : 'border-amber-600/50 hover:border-amber-400/70 hover:bg-gradient-to-br hover:from-sky-800/90 hover:to-sky-900/90 hover:scale-105 hover:shadow-2xl active:scale-95';
-                    
-                    return (
+                .map((cell) => {
+                  const state = getCellState(cell.id);
+                  const base =
+                    'relative aspect-square rounded-lg sm:rounded-xl border-2 shadow-lg overflow-hidden cursor-pointer transition-all duration-300';
+                  const colors =
+                    state === 'solved'
+                      ? 'border-emerald-400/60 scale-95 opacity-60'
+                      : state === 'selected'
+                      ? 'ring-4 ring-amber-400/80 border-amber-400 scale-110 shadow-2xl shadow-amber-500/50 z-20'
+                      : 'border-amber-600/50 hover:border-amber-400/70 hover:scale-105 hover:shadow-2xl active:scale-95';
+                  
+                  return (
                       <button
                         key={cell.id}
                         onClick={() => onCellClick(cell.id)}
@@ -469,9 +469,15 @@ export default function Home() {
                               alt={cell.name}
                               className="object-contain p-0.5 absolute inset-0 w-full h-full z-0"
                               loading={selected.includes(cell.id) ? 'eager' : 'lazy'}
-                              crossOrigin="anonymous"
+                              referrerPolicy="no-referrer"
+                              onError={(e) => {
+                                // Hide broken images gracefully
+                                e.currentTarget.style.display = 'none';
+                              }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10 pointer-events-none" />
+                            {showNames && (
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10 pointer-events-none" />
+                            )}
                           </>
                         )}
                         
