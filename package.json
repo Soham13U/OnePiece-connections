@@ -1,0 +1,16 @@
+{
+  "name": "op-connections",
+  "version": "1.0.0",
+  "description": "One Piece Connections puzzle generator and game.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "generate:tags": "node --loader ts-node/esm src/tagCharacters.ts",
+    "generate:puzzle": "node --loader ts-node/esm src/generatePuzzle.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.13",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
