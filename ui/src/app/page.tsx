@@ -372,6 +372,7 @@ export default function Home() {
                                     src={c.imageUrl}
                                     alt={c.name}
                                     className="object-contain w-full h-full"
+                                    crossOrigin="anonymous"
                                   />
                                 </span>
                               )}
@@ -466,14 +467,11 @@ export default function Home() {
                             <img
                               src={cell.imageUrl}
                               alt={cell.name}
-                              className="object-contain p-0.5 absolute inset-0 w-full h-full"
+                              className="object-contain p-0.5 absolute inset-0 w-full h-full z-0"
                               loading={selected.includes(cell.id) ? 'eager' : 'lazy'}
-                              onError={(e) => {
-                                // Hide broken images
-                                e.currentTarget.style.display = 'none';
-                              }}
+                              crossOrigin="anonymous"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10 pointer-events-none" />
                           </>
                         )}
                         
