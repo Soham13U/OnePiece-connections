@@ -60,6 +60,7 @@ tmp/
 temp/
 *.tmp
 temp.json
+old.txt
 
 # Vercel
 .vercel

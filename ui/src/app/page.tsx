@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { generatePuzzle } from '@/lib/puzzle';
 import charactersData from '@/data/onepiece_characters_tagged.json';
 import type { TaggedCharacter } from '@/lib/models';
+import { getProxiedImageUrl } from '@/lib/imageProxy';
 
 type Cell = {
   id: number;
@@ -369,10 +370,9 @@ export default function Home() {
                               {c.imageUrl && (
                                 <span className="relative h-8 w-8 sm:h-10 sm:w-10 rounded-full overflow-hidden bg-sky-900/40 flex-shrink-0 ring-2 ring-white/60">
                                   <img
-                                    src={c.imageUrl}
+                                    src={getProxiedImageUrl(c.imageUrl) || ''}
                                     alt={c.name}
                                     className="object-contain w-full h-full"
-                                    referrerPolicy="no-referrer"
                                   />
                                 </span>
                               )}
@@ -465,13 +465,12 @@ export default function Home() {
                         {cell.imageUrl && (
                           <>
                             <img
-                              src={cell.imageUrl}
+                              src={getProxiedImageUrl(cell.imageUrl) || ''}
                               alt={cell.name}
                               className="object-contain p-0.5 absolute inset-0 w-full h-full z-0"
                               loading={selected.includes(cell.id) ? 'eager' : 'lazy'}
-                              referrerPolicy="no-referrer"
                               onError={(e) => {
-                                // Hide broken images gracefully
+                                // Hide broken images gracefully - some images may fail due to CDN restrictions
                                 e.currentTarget.style.display = 'none';
                               }}
                             />
