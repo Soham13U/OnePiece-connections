@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { generatePuzzle } from '@/lib/puzzle';
 import charactersData from '@/data/onepiece_characters_tagged.json';
@@ -369,12 +368,10 @@ export default function Home() {
                             >
                               {c.imageUrl && (
                                 <span className="relative h-8 w-8 sm:h-10 sm:w-10 rounded-full overflow-hidden bg-sky-900/40 flex-shrink-0 ring-2 ring-white/60">
-                                  <Image
+                                  <img
                                     src={c.imageUrl}
                                     alt={c.name}
-                                    fill
-                                    sizes="40px"
-                                    className="object-contain"
+                                    className="object-contain w-full h-full"
                                   />
                                 </span>
                               )}
@@ -466,13 +463,15 @@ export default function Home() {
                       >
                         {cell.imageUrl && (
                           <>
-                            <Image
+                            <img
                               src={cell.imageUrl}
                               alt={cell.name}
-                              fill
-                              sizes="25vw"
-                              className="object-contain p-0.5"
-                              priority={selected.includes(cell.id)}
+                              className="object-contain p-0.5 absolute inset-0 w-full h-full"
+                              loading={selected.includes(cell.id) ? 'eager' : 'lazy'}
+                              onError={(e) => {
+                                // Hide broken images
+                                e.currentTarget.style.display = 'none';
+                              }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                           </>

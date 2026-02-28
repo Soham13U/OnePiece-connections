@@ -195,7 +195,7 @@ function extractFieldsFromInfobox(pageId, title, infobox, imageUrl, wikitext) {
   for (const block of infobox.data) {
     if (block.type === 'group' && block.data?.value) {
       for (const item of block.data.value) {
-        if (item.type === 'data' && item.data) {
+      if (item.type === 'data' && item.data) {
           const rawLabel = (item.data.label || '').toString();
           const rawValue = (item.data.value || '').toString();
           const label = stripHtml(rawLabel);
@@ -384,35 +384,35 @@ async function main() {
     pages,
     5,
     async (page) => {
-      const title = page.title;
-
-      try {
+        const title = page.title;
+      
+        try {
         const [infobox, imageUrl, wikitext] = await Promise.all([
-          fetchInfobox(title),
-          fetchPageImage(title),
+            fetchInfobox(title),
+            fetchPageImage(title),
           fetchWikitext(title),
-        ]);
+          ]);
         const mapped = extractFieldsFromInfobox(page.pageid, title, infobox, imageUrl, wikitext);
-        console.log(`OK: ${mapped.name}`);
-        return mapped;
-      } catch (e) {
-        console.error(`Failed for ${title}:`, e.message);
-        return {
+          console.log(`OK: ${mapped.name}`);
+          return mapped;
+        } catch (e) {
+          console.error(`Failed for ${title}:`, e.message);
+          return {
           id: page.pageid,
-          name: title.replace(/_/g, ' '),
-          imageUrl: null,
+            name: title.replace(/_/g, ' '),
+            imageUrl: null,
           crews: [],
-          roles: [],
+            roles: [],
           devilFruitType: null,
           hasAwakenedFruit: null,
           hakiTypes: [],
-          race: null,
+            race: null,
           bountyNumber: null,
           status: null,
           origin: null,
-        };
+          };
+        }
       }
-    }
   );
 
   const outPath = path.join(__dirname, 'onepiece_characters.json');
