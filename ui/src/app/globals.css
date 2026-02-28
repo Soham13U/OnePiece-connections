@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-sky-950 text-amber-100 antialiased;
+  font-feature-settings: 'kern' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* One Piece themed ocean background */
+.bg-ocean-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.15), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.12), transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(14, 116, 144, 0.18), transparent 50%),
+    radial-gradient(circle at 60% 20%, rgba(30, 64, 175, 0.1), transparent 50%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+  background-color: #020617;
+  background-attachment: fixed;
+}
+
+/* Custom scrollbar - One Piece themed */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-sky-950/80;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-amber-500/60 to-amber-600/60 rounded-full;
+  border: 2px solid rgba(2, 6, 23, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gradient-to-b from-amber-400/80 to-amber-500/80;
+}
+
+/* Smooth transitions for interactive elements */
+button, a {
+  @apply transition-all duration-200;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus visible for accessibility */
+button:focus-visible,
+a:focus-visible {
+  @apply outline-2 outline-offset-2 outline-amber-400 rounded-lg;
+}
+
+/* Selection styles */
+::selection {
+  @apply bg-amber-500/30 text-amber-100;
+}
+
+::-moz-selection {
+  @apply bg-amber-500/30 text-amber-100;
+}
+
+/* Smooth animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(251, 191, 36, 0.1);
+}
+
+/* Text glow effect */
+.text-glow {
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.5),
+               0 0 20px rgba(251, 191, 36, 0.3),
+               0 0 30px rgba(251, 191, 36, 0.2);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
+              0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading pulse */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
