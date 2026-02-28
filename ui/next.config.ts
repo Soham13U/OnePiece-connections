@@ -1,8 +1,19 @@
 import type { NextConfig } from "next";
 
+const repo = process.env.GITHUB_REPOSITORY?.split('/')?.[1] ?? '';
+const isUserOrOrgPage = repo.endsWith('.github.io');
+const basePath = repo && !isUserOrOrgPage ? `/${repo}` : '';
+
 const nextConfig: NextConfig = {
   output: 'export', // Enable static export
+  trailingSlash: true,
   reactCompiler: true,
+  // Helps Next/Turbopack resolve the correct root when multiple lockfiles exist.
+  turbopack: {
+    root: __dirname,
+  },
+  basePath,
+  assetPrefix: basePath || undefined,
   images: {
     unoptimized: true, // Required for static export
     remotePatterns: [
@@ -13,9 +24,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // If deploying to a subdirectory, uncomment and set your repo name:
-  // basePath: '/op-connections',
-  // trailingSlash: true,
 };
 
 export default nextConfig;
