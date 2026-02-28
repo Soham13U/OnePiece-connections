@@ -463,25 +463,20 @@ export default function Home() {
                         aria-label={`Select ${cell.name}`}
                       >
                         {cell.imageUrl && (
-                          <>
-                            <img
-                              src={getProxiedImageUrl(cell.imageUrl) || ''}
-                              alt={cell.name}
-                              className="object-contain p-0.5 absolute inset-0 w-full h-full z-0"
-                              loading={selected.includes(cell.id) ? 'eager' : 'lazy'}
-                              onError={(e) => {
-                                // Hide broken images gracefully - some images may fail due to CDN restrictions
-                                e.currentTarget.style.display = 'none';
-                              }}
-                            />
-                            {showNames && (
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10 pointer-events-none" />
-                            )}
-                          </>
+                          <img
+                            src={getProxiedImageUrl(cell.imageUrl) || ''}
+                            alt={cell.name}
+                            className="object-contain p-0.5 absolute inset-0 w-full h-full z-0"
+                            loading={selected.includes(cell.id) ? 'eager' : 'lazy'}
+                            onError={(e) => {
+                              // Hide broken images gracefully - some images may fail due to CDN restrictions
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
                         )}
                         
                         {showNames && (
-                          <span className="absolute bottom-0 left-0 right-0 text-[9px] sm:text-[10px] font-black text-center leading-tight px-1 py-1 sm:py-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)] bg-gradient-to-t from-black/80 via-black/60 to-transparent text-amber-50">
+                          <span className="absolute bottom-0 left-0 right-0 text-[9px] sm:text-[10px] font-black text-center leading-tight px-1 py-1 sm:py-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)] bg-gradient-to-t from-black/90 via-black/70 to-black/50 text-amber-50 z-10">
                             {cell.name}
                           </span>
                         )}
